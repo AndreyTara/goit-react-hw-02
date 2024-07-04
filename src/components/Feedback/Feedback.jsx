@@ -20,9 +20,9 @@ function Feedback({ value }) {
 
   return (
     <div>
-      {keysArrValue.map((item) => {
+      {keysArrValue.map((item, index) => {
         return (
-          <p key={item} className={css.p}>
+          <p key={index} className={css.p}>
             {item}: {value[item]}
           </p>
         );
