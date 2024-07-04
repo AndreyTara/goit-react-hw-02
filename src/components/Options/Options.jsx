@@ -1,12 +1,12 @@
 import { Children } from "react";
 import css from "./Options.module.css";
 
-function Options({ value, onClick = (e) => console.log(e.target) }) {
+function Options({ value, updateFeedback }) {
   return (
-    <>
+    <div>
       {Object.keys(value).map((item) => {
         return (
-          <button id={item} className={css.btn} onClick={onClick}>
+          <button id={item} className={css.btn} onClick={updateFeedback}>
             {item}
           </button>
         );
@@ -14,7 +14,7 @@ function Options({ value, onClick = (e) => console.log(e.target) }) {
       {/* <button className={css.btn} onClick={onClick}>
         Reset
       </button> */}
-    </>
+    </div>
   );
 }
 
