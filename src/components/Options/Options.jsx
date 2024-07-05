@@ -16,7 +16,7 @@ function Options({ totalFeedback, keysArrValue, updateFeedback }) {
       })}
       {totalFeedback > 0 && (
         <button
-          id="reset"
+          id="reset "
           className={css.btn}
           onClick={() => updateFeedback(`reset`)}
         >
