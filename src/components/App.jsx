@@ -6,8 +6,10 @@ import Notification from "./Notification/Notification";
 import "./App.css";
 
 function App() {
-  const [value, setValue] = useState(() => {
-    const savedData = JSON.parse(window.localStorage.getItem("voting"));
+  const [votingList, setVotingList] = useState(() => {
+    const savedData = JSON.parse(
+      window.localStorage.getItem("client-reviews-voting")
+    );
     if (savedData) {
       return savedData;
     }
@@ -20,43 +22,49 @@ function App() {
   const [totalFeedback, setTotalFeedback] = useState(0);
   const [positiveFeedback, setPositiveFeedback] = useState(0);
   const [keysArrValue, setKeysArrValue] = useState([]);
+
   useEffect(() => {
-    setKeysArrValue(Object.keys(value));
+    setKeysArrValue(Object.keys(votingList));
   }, []);
+
   useEffect(() => {
     const totalResult = keysArrValue.reduce((acc, item) => {
-      return (acc += +value[item]);
+      return (acc += +votingList[item]);
     }, 0);
     setTotalFeedback(totalResult);
     const positiveCount = keysArrValue
       .filter((item) => item === "good")
       .reduce((acc, item) => {
-        return (acc += +value[item]);
+        return (acc += +votingList[item]);
       }, 0);
     console.log(positiveCount);
     setPositiveFeedback(Math.round((positiveCount / totalResult) * 100));
-  }, [value, totalFeedback]);
+  }, [votingList, totalFeedback]);
 
   /**
    * # updateFeedback
    * @param {String} feedbackType :'good','bad','neutral'
    */
   const updateFeedback = (feedbackType) => {
-    // console.log(feedbackType);
     if (feedbackType === "reset") {
-      setValue({
+      setVotingList({
         good: 0,
         bad: 0,
         neutral: 0,
       });
       return;
     }
-    setValue((prev) => ({
+    setVotingList((prev) => ({
       ...prev,
       [feedbackType]: prev[feedbackType] + 1,
     }));
   };
-
+  useEffect(() => {
+    window.localStorage.setItem(
+      "client-reviews-voting",
+      JSON.stringify(votingList)
+    );
+  }, [votingList]);
   return (
     <>
       <Description />
@@ -68,7 +76,7 @@ function App() {
       {!totalFeedback > 0 && <Notification />}
       {totalFeedback > 0 && (
         <Feedback
-          value={value}
+          votingList={votingList}
           keysArrValue={keysArrValue}
           totalFeedback={totalFeedback}
           positiveFeedback={positiveFeedback}
