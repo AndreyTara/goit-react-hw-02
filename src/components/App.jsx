@@ -18,22 +18,23 @@ function App() {
     };
   });
   const [totalFeedback, setTotalFeedback] = useState(0);
-  const [positive, setPositive] = useState(0);
+  const [positiveFeedback, setPositiveFeedback] = useState(0);
   const [keysArrValue, setKeysArrValue] = useState([]);
   useEffect(() => {
     setKeysArrValue(Object.keys(value));
   }, []);
   useEffect(() => {
     const totalResult = keysArrValue.reduce((acc, item) => {
-      return (acc += value[item]);
+      return (acc += +value[item]);
     }, 0);
     setTotalFeedback(totalResult);
     const positiveCount = keysArrValue
-      .filter((item) => item !== "bad")
+      .filter((item) => item === "good")
       .reduce((acc, item) => {
-        return (acc += value[item]);
+        return (acc += +value[item]);
       }, 0);
-    setPositive(Math.floor((positiveCount / totalResult) * 100));
+    console.log(positiveCount);
+    setPositiveFeedback(Math.round((positiveCount / totalResult) * 100));
   }, [value, totalFeedback]);
 
   /**
@@ -70,7 +71,7 @@ function App() {
           value={value}
           keysArrValue={keysArrValue}
           totalFeedback={totalFeedback}
-          positive={positive}
+          positiveFeedback={positiveFeedback}
         />
       )}
       <footer className="footer">Create by Andrii Tarabanchuk 2024</footer>

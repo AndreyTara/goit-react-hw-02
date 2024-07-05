@@ -1,6 +1,6 @@
 import css from "./Feedback.module.css";
 // import { useState, useEffect } from "react";
-function Feedback({ value, totalFeedback, positive, keysArrValue }) {
+function Feedback({ value, totalFeedback, positiveFeedback, keysArrValue }) {
   // console.log(totalFeedback);
   // console.log(positive);
   // console.log(keysArrValue);
@@ -32,8 +32,8 @@ function Feedback({ value, totalFeedback, positive, keysArrValue }) {
           </p>
         );
       })}
-      {/* <p className={css.p}>Total: {totalFeedback}</p>
-      <p className={css.p}>Positive: {positive}%</p> */}
+      <p className={css.p}>Total: {totalFeedback}</p>
+      <p className={css.p}>Positive: {positiveFeedback}%</p>
     </div>
   );
 }
