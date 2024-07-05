@@ -21,23 +21,22 @@ function App() {
   });
   const [totalFeedback, setTotalFeedback] = useState(0);
   const [positiveFeedback, setPositiveFeedback] = useState(0);
-  const [keysArrValue, setKeysArrValue] = useState([]);
 
-  useEffect(() => {
-    setKeysArrValue(Object.keys(votingList));
-  }, []);
+  // const [keysArrValue, setKeysArrValue] = useState([]);
+  // useEffect(() => {
+  //   setKeysArrValue(Object.keys(votingList));
+  // }, []);
+
+  const keysArrValue = Object.keys(votingList);
 
   useEffect(() => {
     const totalResult = keysArrValue.reduce((acc, item) => {
       return (acc += +votingList[item]);
     }, 0);
     setTotalFeedback(totalResult);
-    const positiveCount = keysArrValue
-      .filter((item) => item === "good")
-      .reduce((acc, item) => {
-        return (acc += +votingList[item]);
-      }, 0);
-    console.log(positiveCount);
+    const positiveCount = votingList["good"].reduce((acc, item) => {
+      return (acc += +votingList[item]);
+    }, 0);
     setPositiveFeedback(Math.round((positiveCount / totalResult) * 100));
   }, [votingList, totalFeedback]);
 
