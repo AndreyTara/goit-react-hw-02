@@ -1,19 +1,28 @@
-import { Children } from "react";
 import css from "./Options.module.css";
 
-function Options({ value, updateFeedback }) {
+function Options({ totalFeedback, keysArrValue, updateFeedback }) {
   return (
-    <div>
-      {Object.keys(value).map((item) => {
+    <div className={css.wrap}>
+      {keysArrValue.map((item, index) => {
         return (
-          <button id={item} className={css.btn} onClick={updateFeedback}>
+          <button
+            key={index}
+            className={css.btn}
+            onClick={() => updateFeedback(`${item}`)}
+          >
             {item}
           </button>
         );
       })}
-      {/* <button className={css.btn} onClick={onClick}>
-        Reset
-      </button> */}
+      {totalFeedback > 0 && (
+        <button
+          id="reset"
+          className={css.btn}
+          onClick={() => updateFeedback(`reset`)}
+        >
+          Reset
+        </button>
+      )}
     </div>
   );
 }
