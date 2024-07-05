@@ -73,7 +73,7 @@ function App() {
         keysArrValue={keysArrValue}
         totalFeedback={totalFeedback}
       />
-      {!totalFeedback > 0 && <Notification />}
+      {!(totalFeedback > 0) && <Notification />}
       {totalFeedback > 0 && (
         <Feedback
           votingList={votingList}
