@@ -2,7 +2,7 @@ import css from "./Description.module.css";
 
 function Description() {
   return (
-    <header>
+    <header className={css.header}>
       <h1>
         <span className={css.green}>Sip</span> Happens Café
       </h1>
