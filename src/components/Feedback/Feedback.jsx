@@ -27,7 +27,7 @@ function Feedback({ value, totalFeedback, positive, keysArrValue }) {
     <div className={css.wrap}>
       {keysArrValue.map((item, index) => {
         return (
-          <p key={index} className={css.p} style={(border = "none")}>
+          <p key={index} className={css.p}>
             {item}: {value[item]}
           </p>
         );
