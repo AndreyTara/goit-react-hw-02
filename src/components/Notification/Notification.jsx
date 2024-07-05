@@ -1,9 +1,9 @@
 import css from "./Notification.module.css";
 
-function Notification({ totalFeedback }) {
+function Notification() {
   return (
     <div className={css.wrap}>
-      {!totalFeedback > 0 && <p className={css.p}>No feedback yet!</p>}
+      <p className={css.p}>No feedback yet!</p>
     </div>
   );
 }

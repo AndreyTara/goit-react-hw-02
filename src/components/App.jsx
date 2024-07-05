@@ -64,13 +64,15 @@ function App() {
         keysArrValue={keysArrValue}
         totalFeedback={totalFeedback}
       />
-      <Notification totalFeedback={totalFeedback} />
-      <Feedback
-        value={value}
-        totalFeedback={totalFeedback}
-        positive={positive}
-        keysArrValue={keysArrValue}
-      />
+      {!totalFeedback > 0 && <Notification />}
+      {totalFeedback > 0 && (
+        <Feedback
+          value={value}
+          keysArrValue={keysArrValue}
+          totalFeedback={totalFeedback}
+          positive={positive}
+        />
+      )}
       <footer className="footer">Create by Andrii Tarabanchuk 2024</footer>
     </>
   );
