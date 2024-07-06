@@ -53,24 +53,24 @@ function App() {
    * @param {String} feedbackType :'good','bad','neutral'
    */
   const updateFeedback = (feedbackType) => {
-    if (feedbackType === "reset") {
-      setVotingList({
-        good: 0,
-        bad: 0,
-        neutral: 0,
-      });
-      return;
-    }
     setVotingList((prev) => ({
       ...prev,
       [feedbackType]: prev[feedbackType] + 1,
     }));
   };
-
+  const resetFeedback = () => {
+    setVotingList((prev) => ({
+      ...prev,
+      good: 0,
+      bad: 0,
+      neutral: 0,
+    }));
+  };
   return (
     <>
       <Description />
       <Options
+        resetFeedback={resetFeedback}
         updateFeedback={updateFeedback}
         keysArrValue={keysArrValue}
         totalFeedback={totalFeedback}
