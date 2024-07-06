@@ -58,6 +58,11 @@ function App() {
       [feedbackType]: prev[feedbackType] + 1,
     }));
   };
+
+  /**
+   * # resetFeedback
+   * @param {} resetFeedback
+   */
   const resetFeedback = () => {
     setVotingList((prev) => ({
       ...prev,
@@ -66,6 +71,7 @@ function App() {
       neutral: 0,
     }));
   };
+
   return (
     <>
       <Description />
