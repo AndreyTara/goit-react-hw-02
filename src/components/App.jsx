@@ -6,39 +6,47 @@ import Notification from "./Notification/Notification";
 import "./App.css";
 
 function App() {
+  //hook for update value 'votingList'
   const [votingList, setVotingList] = useState(() => {
+    // get localStorage save data  value 'votingList'
     const savedData = JSON.parse(
       window.localStorage.getItem("client-reviews-voting")
     );
+    // if data Put data LS to value 'votingList'
     if (savedData) {
       return savedData;
     }
+    //return value 'votingList' empty
     return {
       good: 0,
       bad: 0,
       neutral: 0,
     };
   });
-  const [totalFeedback, setTotalFeedback] = useState(0);
-  const [positiveFeedback, setPositiveFeedback] = useState(0);
 
-  // const [keysArrValue, setKeysArrValue] = useState([]);
-  // useEffect(() => {
-  //   setKeysArrValue(Object.keys(votingList));
-  // }, []);
-
-  const keysArrValue = Object.keys(votingList);
-
+  //update LocalStorage with key 'client-reviews-voting'
   useEffect(() => {
-    const totalResult = keysArrValue.reduce((acc, item) => {
+    window.localStorage.setItem(
+      "client-reviews-voting",
+      JSON.stringify(votingList)
+    );
+  }, [votingList]);
+
+  //update keysArrValue
+  const keysArrValue = Object.keys(votingList);
+  let totalFeedback = keysArrValue.reduce((acc, item) => {
+    return (acc += +votingList[item]);
+  }, 0);
+
+  //update positiveCount count value to votingList['good']
+  let positiveCount = keysArrValue
+    .filter((item) => item === "good")
+    .reduce((acc, item) => {
       return (acc += +votingList[item]);
     }, 0);
-    setTotalFeedback(totalResult);
-    const positiveCount = votingList["good"].reduce((acc, item) => {
-      return (acc += +votingList[item]);
-    }, 0);
-    setPositiveFeedback(Math.round((positiveCount / totalResult) * 100));
-  }, [votingList, totalFeedback]);
+
+  //update positiveFeedback
+  let positiveFeedback = Math.round((positiveCount / totalFeedback) * 100);
 
   /**
    * # updateFeedback
@@ -58,12 +66,7 @@ function App() {
       [feedbackType]: prev[feedbackType] + 1,
     }));
   };
-  useEffect(() => {
-    window.localStorage.setItem(
-      "client-reviews-voting",
-      JSON.stringify(votingList)
-    );
-  }, [votingList]);
+
   return (
     <>
       <Description />

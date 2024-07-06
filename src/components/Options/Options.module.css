@@ -5,7 +5,14 @@
   padding: 10px;
   text-transform: capitalize;
   border-radius: 5px;
+  border: none;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  &:hover {
+    background-color: aquamarine;
+    box-shadow: 2px 2px 2px 2px gray;
+  }
 }
+
 .wrap {
   padding-left: 10px;
 }
